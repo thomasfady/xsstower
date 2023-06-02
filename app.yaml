@@ -1,0 +1,6 @@
+handlers:
+    wildcard:
+        domain: true
+        path: true
+registration:
+    enabled: true
