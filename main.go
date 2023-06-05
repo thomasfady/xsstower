@@ -5,7 +5,6 @@ import (
 
 	"log"
 
-	"github.com/thomasfady/xsstower/config"
 	"github.com/thomasfady/xsstower/models"
 	"github.com/thomasfady/xsstower/routers"
 	"github.com/thomasfady/xsstower/routes/unauthenticated"
@@ -22,10 +21,8 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	r.Use(gin.Recovery())
-	models.ConnectDatabase()
 
-	config.ConfigPath = "app.yaml"
-	config.LoadConfig()
+	models.ConnectDatabase()
 
 	routers.SetupCors(r)
 	routers.SetupSession(r)
