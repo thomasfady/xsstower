@@ -39,7 +39,7 @@ const show = ref(false);
 const message = useMessage();
 
 const form = ref({
-    domain: "*",
+    domain: window.location.host,
     path: "admin",
     screenshot: true,
     dom: true,
@@ -66,7 +66,7 @@ async function onPositiveClick(){
         message.success("Handler created")
         show.value = false;
         form.value = {
-            domain: "*",
+            domain: window.location.host,
             path: "admin",
             screenshot: true,
             dom: true,
