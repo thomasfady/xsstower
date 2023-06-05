@@ -63,7 +63,7 @@ func TestPostLogin(t *testing.T) {
 
 	res = requester.Post("/api/login", body)
 	assert.Equal(t, 200, res.Code)
-	assert.Equal(t, "{\"Email\":\"user@user.fr\",\"Username\":\"user\",\"IsAdmin\":false}", res.ResponseString())
+	assert.Equal(t, "{\"ID\":1,\"Email\":\"user@user.fr\",\"Username\":\"user\",\"IsAdmin\":false}", res.ResponseString())
 
 	res = requester.Get("/api/mock_authenticated")
 	assert.Equal(t, 200, res.Code)
