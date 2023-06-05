@@ -99,7 +99,7 @@ CGO_ENABLED=0 GOOS=linux go build -o xsstower -ldflags="-s -w" main.go
 ## TODO
 
 - [ ] Registration
-- [ ] Database config
+- [X] Database config
 - [ ] Change password form
 - [ ] 2FA
 - [ ] Notification system

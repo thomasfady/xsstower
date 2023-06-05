@@ -1,0 +1,26 @@
+version: "3.5"
+services:
+  xsstower:
+    build: ../
+    environment:
+      - XT_DATABASE_DSN=xsstower:xsstower@tcp(db:3306)/xsstower?charset=utf8&parseTime=True&loc=Local
+      - XT_DATABASE_TYPE=mysql
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+  db:
+    image: mariadb:lts
+    environment:
+      - MARIADB_DATABASE=xsstower
+      - MARIADB_USER=xsstower
+      - MARIADB_PASSWORD=xsstower
+      - MARIADB_ROOT_PASSWORD=xsstower
+    healthcheck:
+      test: ["CMD", "bash", "-c", "mysqladmin ping --silent -u $$MARIADB_USER --password=$$MARIADB_PASSWORD"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

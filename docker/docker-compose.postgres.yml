@@ -1,0 +1,25 @@
+version: "3.5"
+services:
+  xsstower:
+    build: ../
+    environment:
+      - XT_DATABASE_DSN=host=db user=xsstower password=xsstower dbname=xsstower port=5432 sslmode=disable TimeZone=Europe/Paris
+      - XT_DATABASE_TYPE=postgres
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=xsstower
+      - POSTGRES_USER=xsstower
+      - POSTGRES_PASSWORD=xsstower
+    healthcheck:
+      test: ["CMD", "bash", "-c", "pg_isready -U $$POSTGRES_USER"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
