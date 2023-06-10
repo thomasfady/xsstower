@@ -29,4 +29,6 @@ func AuthenticatedRouter(engine *gin.Engine, path string) {
 	group.GET("/handler/:key", api.GetHandler)
 	group.PUT("/handler/:key", api.PutHandler)
 	group.DELETE("/handler/:key", api.DeleteHandler)
+
+	group.POST("/profile/set_password", api.PostSetPassword)
 }

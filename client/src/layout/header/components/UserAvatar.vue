@@ -21,7 +21,10 @@ import { NIcon } from "naive-ui";
 import {useDialog } from 'naive-ui'
 
 import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
 
+
+const router = useRouter()
 const store = useUserStore()
 
 const dialog = useDialog()
@@ -36,7 +39,7 @@ const renderIcon = (icon) => {
 const options = [
   {
     label: 'Profile',
-    key: 'Profile',
+    key: 'profile',
     icon: renderIcon(PersonIcon),
   },
   {
@@ -59,6 +62,8 @@ function handleSelect(key) {
         store.logout()
       },
     })
+  } else if (key === 'profile') {
+    router.push("/profile")
   }
 }
 </script>

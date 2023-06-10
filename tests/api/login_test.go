@@ -31,8 +31,9 @@ func SetUpRouter() *gin.Engine {
 }
 
 func TestPostLogin(t *testing.T) {
-	router := SetUpRouter()
 
+	router := SetUpRouter()
+	tests.ResetDB()
 	requester := tests.NewRequester(router)
 
 	res := requester.Post("/api/login", nil)

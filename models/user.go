@@ -1,16 +1,22 @@
 package models
 
 import (
+	"time"
+
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 type User struct {
-	Base
-	Email        string        `gorm:"size:255;not null;unique"`
-	Username     string        `gorm:"size:255;not null;unique"`
-	Password     string        `gorm:"size:255;not null;" json:"-"`
-	IsAdmin      bool          `gorm:"default:false"`
-	HandlersRbac []HandlerRbac `json:"-"`
+	ID           uint           `gorm:"primaryKey"`
+	CreatedAt    time.Time      `json:"-"`
+	UpdatedAt    time.Time      `json:"-"`
+	DeletedAt    gorm.DeletedAt `gorm:"index"  json:"-"`
+	Email        string         `gorm:"size:255;not null;unique"`
+	Username     string         `gorm:"size:255;not null;unique"`
+	Password     string         `gorm:"size:255;not null;" json:"-"`
+	IsAdmin      bool           `gorm:"default:false"`
+	HandlersRbac []HandlerRbac  `json:"-"`
 }
 
 func (u *User) CheckPassword(pass string) bool {
