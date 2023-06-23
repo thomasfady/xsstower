@@ -10,6 +10,7 @@ import (
 )
 
 func BaseRouter() *gin.Engine {
+	gin.SetMode(gin.TestMode)
 	router := gin.Default()
 	models.ConnectDatabase()
 
