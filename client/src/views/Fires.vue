@@ -75,6 +75,7 @@ const columns= [
             FiresActions,
           {
             hit: row,
+            onReloadFires: fetchFires
           },
         );
       }

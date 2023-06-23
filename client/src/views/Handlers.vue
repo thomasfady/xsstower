@@ -60,14 +60,14 @@ const columns= [
           HandlersActions,
           {
             handler: row,
-            onHandleDeleted: fetchHandles
+            onHandleDeleted: fetchHandlers
           },
         );
       }
     }
   ];
 
-function fetchHandles() {
+function fetchHandlers() {
     fetch("/api/handlers")
     .then(response => response.json())
     .then((data) => {
@@ -96,7 +96,7 @@ function updateSwitch(row, type){
 }
 
 const handlers = ref([])
-fetchHandles()
+fetchHandlers()
 
 </script>
 <template>
@@ -110,7 +110,7 @@ fetchHandles()
                     </template>
                     Add
                 </n-button>
-            <n-button type="info" icon-placement="left" @click="fetchHandles">
+            <n-button type="info" icon-placement="left" @click="fetchHandlers">
                     <template #icon>
                         <n-icon><refresh /></n-icon>
                     </template>
@@ -137,7 +137,7 @@ fetchHandles()
           </template>
         </n-data-table>
     </n-card>
-    <create-handler @handleCreated="fetchHandlers" ref="create"/>
+    <create-handler @handlerCreated="fetchHandlers" ref="create"/>
 </template>
 <style scoped>
 header {
