@@ -31,4 +31,6 @@ func AuthenticatedRouter(engine *gin.Engine, path string) {
 	group.DELETE("/handler/:key", api.DeleteHandler)
 
 	group.POST("/profile/set_password", api.PostSetPassword)
+	group.GET("/profile/notifications", api.GetNotificationParams)
+	group.POST("/profile/notifications", api.PostNotificationParams)
 }
