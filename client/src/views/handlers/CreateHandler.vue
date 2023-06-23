@@ -51,7 +51,7 @@ function open(){
 
 defineExpose({ open });
 
-const emit = defineEmits(['handleCreated'])
+const emit = defineEmits(['handlerCreated'])
 async function onPositiveClick(){
     
     const response = await fetch("/api/handlers",{
@@ -64,6 +64,7 @@ async function onPositiveClick(){
         message.error(await response.json())
     } else {
         message.success("Handler created")
+        await emit('handlerCreated')
         show.value = false;
         form.value = {
             domain: window.location.host,
@@ -71,7 +72,7 @@ async function onPositiveClick(){
             screenshot: true,
             dom: true,
         }
-        emit('handleCreated')
+        
     }
     return false
 }

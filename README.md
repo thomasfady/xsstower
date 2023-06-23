@@ -104,7 +104,7 @@ CGO_ENABLED=0 GOOS=linux go build -o xsstower -ldflags="-s -w" main.go
 - [ ] 2FA
 - [ ] Notification system
 - [ ] Documentation
-- [ ] UI Fixes
+- [X] UI Fixes
 - [ ] Add tests
 
 

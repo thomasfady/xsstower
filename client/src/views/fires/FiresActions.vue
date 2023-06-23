@@ -29,7 +29,7 @@ const props = defineProps({
   hit: { required: true },
 })
 
-
+const emit = defineEmits(['ReloadFires'])
 function delete_hit() {
     dialog.error({
           title: 'Delete',
@@ -43,6 +43,7 @@ function delete_hit() {
                 fire.value = data
             });
             message.success('Hit deleted')
+            emit('ReloadFires')
           }
         })
 }
