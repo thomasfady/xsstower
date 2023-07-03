@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -100,7 +99,6 @@ func PostNotificationParams(c *gin.Context) {
 			}
 		}
 		models.DB.Save(&user)
-		fmt.Println(user.NotifiersConfig)
 		var config []types.NotifierInformation
 		for _, v := range notify.NotifiersList() {
 			infos := v.GetBaseInformations()

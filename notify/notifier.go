@@ -7,19 +7,15 @@ import (
 	"github.com/thomasfady/xsstower/notify/types"
 )
 
-type NotifyConfig struct {
-	Key       string
-	Sensitive bool
-	Value     string
-}
-
 type NotifierInterface interface {
 	Notify(hit models.XssHit) error
+	CanNotify() bool
 	GetBaseInformations() (infos types.NotifierInformation)
+	SetConfig(key string, value string)
 }
 
 type Notifier struct {
-	Config []NotifyConfig
+	Config []types.NotifyConfig
 }
 
 func (n *Notifier) GetConfig(key string) (value string) {
@@ -33,8 +29,17 @@ func (n *Notifier) GetConfig(key string) (value string) {
 	return
 }
 
+func (n *Notifier) SetConfig(key string, value string) {
+	for k, v := range n.Config {
+		if v.Key == key {
+			n.Config[k].Value = value
+		}
+	}
+}
+
 func NotifiersList() (ni []NotifierInterface) {
 	t := &TelegramNotifier{}
+	t.Config = t.GetBaseInformations().Config
 	ni = append(ni, t)
 	return
 }
@@ -45,13 +50,17 @@ func NotifyHit(correlation_key string) {
 	time.Sleep(10 * time.Second)
 
 	var hit models.XssHit
-	models.DB.Preload("Handler").First(&hit, "correlation_key = ?", correlation_key)
-
-	t := &TelegramNotifier{}
-	t.Config = []NotifyConfig{
-		{Value: "CHANGEME", Sensitive: false, Key: "chat_id"},
-		{Value: "CHANGEME", Sensitive: true, Key: "token"},
+	models.DB.Preload("Handler").Preload("Owner").First(&hit, "correlation_key = ?", correlation_key)
+	for _, n := range NotifiersList() {
+		infos := n.GetBaseInformations()
+		for _, config := range infos.Config {
+			val, ok := hit.Owner.NotifiersConfig[infos.Key+"."+config.Key]
+			if ok {
+				n.SetConfig(config.Key, val)
+			}
+		}
+		if n.CanNotify() {
+			n.Notify(hit)
+		}
 	}
-	
-	t.Notify(hit)
 }

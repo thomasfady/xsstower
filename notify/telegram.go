@@ -14,6 +14,11 @@ type TelegramNotifier struct {
 	Notifier
 }
 
+func (n *TelegramNotifier) CanNotify() bool {
+	fmt.Println(n.Config)
+	return n.GetConfig("token") != "" && n.GetConfig("chat_id") != "" 
+}
+
 func (n *TelegramNotifier) GetBaseInformations() (infos types.NotifierInformation) {
 	infos.Name = "Telegram"
 	infos.Key = "telegram"
