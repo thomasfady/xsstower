@@ -7,7 +7,8 @@ registration:
 database:
     type: sqlite
     dsn: xsstower.db
-
+web:
+    address: ":8081"
 
 # Database connection documentation from gorm : https://gorm.io/docs/connecting_to_the_database.html
 # database:
