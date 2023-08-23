@@ -38,17 +38,21 @@ func ConnectDatabase() {
 	if gin.Mode() == "debug" {
 		database, err = gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
 	} else {
-		dsn := config.GetConfig("database.dsn").(string)
-		switch config.GetConfig("database.type") {
-		case "sqlite":
-			database, err = ConnectSqlite(dsn)
-		case "mysql":
-			database, err = ConnectMysql(dsn)
-		case "postgres":
-			database, err = ConnectPostgres(dsn)
-		case "sqlserver":
-			database, err = ConnectSqlServer(dsn)
-		default:
+		dsn, ok := config.GetConfig("database.dsn").(string)
+		if ok {
+			switch config.GetConfig("database.type") {
+			case "sqlite":
+				database, err = ConnectSqlite(dsn)
+			case "mysql":
+				database, err = ConnectMysql(dsn)
+			case "postgres":
+				database, err = ConnectPostgres(dsn)
+			case "sqlserver":
+				database, err = ConnectSqlServer(dsn)
+			default:
+				database, err = gorm.Open(sqlite.Open("xsstower.db"), &gorm.Config{})
+			}
+		} else {
 			database, err = gorm.Open(sqlite.Open("xsstower.db"), &gorm.Config{})
 		}
 

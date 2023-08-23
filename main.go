@@ -5,6 +5,7 @@ import (
 
 	"log"
 
+	"github.com/thomasfady/xsstower/config"
 	"github.com/thomasfady/xsstower/models"
 	"github.com/thomasfady/xsstower/routers"
 	"github.com/thomasfady/xsstower/routes/unauthenticated"
@@ -33,6 +34,13 @@ func main() {
 	routers.UnauthenticatedRouter(r, "/api")
 	routers.AuthenticatedRouter(r, "/api")
 	routers.AdminRouter(r, "/api/admin")
-	log.Printf("XssTower started on :8080")
-	r.Run(":8080")
+	address, ok := config.GetConfig("web.address").(string)
+	if ok {
+		log.Printf("XssTower started on " + address)
+		r.Run(address)
+	} else {
+		log.Printf("XssTower started on :8080")
+		r.Run(":8080")
+	}
+
 }

@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/thomasfady/xsstower/models"
+	"github.com/thomasfady/xsstower/notify"
 	"github.com/thomasfady/xsstower/utils"
 
 	"github.com/gin-gonic/gin"
@@ -90,6 +91,7 @@ func GetPayload(c *gin.Context) {
 	}
 	c.Header("Content-Type", "text/js")
 	tmpl.Execute(c.Writer, ctx)
+	go notify.NotifyHit(hit.CorrelationKey)
 }
 
 type CallbackModel struct {

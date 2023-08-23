@@ -8,15 +8,16 @@ import (
 )
 
 type User struct {
-	ID           uint           `gorm:"primaryKey"`
-	CreatedAt    time.Time      `json:"-"`
-	UpdatedAt    time.Time      `json:"-"`
-	DeletedAt    gorm.DeletedAt `gorm:"index"  json:"-"`
-	Email        string         `gorm:"size:255;not null;unique"`
-	Username     string         `gorm:"size:255;not null;unique"`
-	Password     string         `gorm:"size:255;not null;" json:"-"`
-	IsAdmin      bool           `gorm:"default:false"`
-	HandlersRbac []HandlerRbac  `json:"-"`
+	ID              uint              `gorm:"primaryKey"`
+	CreatedAt       time.Time         `json:"-"`
+	UpdatedAt       time.Time         `json:"-"`
+	DeletedAt       gorm.DeletedAt    `gorm:"index"  json:"-"`
+	Email           string            `gorm:"size:255;not null;unique"`
+	Username        string            `gorm:"size:255;not null;unique"`
+	Password        string            `gorm:"size:255;not null;" json:"-"`
+	IsAdmin         bool              `gorm:"default:false"`
+	HandlersRbac    []HandlerRbac     `json:"-"`
+	NotifiersConfig map[string]string `gorm:"serializer:json" json:"-"`
 }
 
 func (u *User) CheckPassword(pass string) bool {
