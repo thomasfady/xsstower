@@ -28,3 +28,8 @@ func GetConfig(key string) interface{} {
 	LoadConfig()
 	return viper.Get(key)
 }
+
+func GetConfigAsString(key string) string {
+	LoadConfig()
+	return viper.GetString(key)
+}

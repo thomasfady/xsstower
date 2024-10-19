@@ -38,8 +38,8 @@ func ConnectDatabase() {
 	if gin.Mode() == "debug" {
 		database, err = gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
 	} else {
-		dsn, ok := config.GetConfig("database.dsn").(string)
-		if ok {
+		dsn := config.GetConfigAsString("database.dsn")
+		if len(dsn) > 0 {
 			switch config.GetConfig("database.type") {
 			case "sqlite":
 				database, err = ConnectSqlite(dsn)
