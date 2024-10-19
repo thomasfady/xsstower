@@ -29,22 +29,28 @@ export const useUserStore = defineStore('user', () => {
         if(user) return JSON.parse(user)
         else return {}
     }
-    async function login(email, password, loading){
+    async function login(email, password, loading, otp){
         loading = true;
         const response = await fetch("/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email: email, password: password }),
+            body: JSON.stringify({ email: email, password: password, otp: otp}),
         })
             loading = false;
         if (!response.ok) {
             message.error(await response.json())
         } else {
-            userInfos.value = await response.json()
-            localStorage.setItem('user', JSON.stringify(userInfos.value))
-            router.push('/')
+            let infos = await response.json();
+            if(infos['Email'] != undefined) {
+                userInfos.value = infos;
+                localStorage.setItem('user', JSON.stringify(userInfos.value))
+                router.push('/')
+                return false;
+            } else {
+                return true;
+            }
         }
     }
     function isLoggedIn() {

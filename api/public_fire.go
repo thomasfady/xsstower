@@ -10,11 +10,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @BasePath	/api/
-// @Summary	Public Fire
-// @Description	Get XSS Fire information
-// @Produce		json
-// @Router			/sharing/{fire_id} [get]
+//	@BasePath		/api/
+//	@Summary		Public Fire
+//	@Description	Get XSS Fire information
+//	@Produce		json
+//	@Router			/sharing/{fire_id} [get]
 func GetPublicFire(c *gin.Context) {
 
 	hit := models.GetHitBySharingKey(c.Param("key"))
@@ -26,10 +26,10 @@ func GetPublicFire(c *gin.Context) {
 
 }
 
-// @BasePath	/api/
-// @Summary	Public Fire
-// @Description	Get XSS Fire File
-// @Router			/sharing/{fire_id}/file/{file_id} [get]
+//	@BasePath		/api/
+//	@Summary		Public Fire
+//	@Description	Get XSS Fire File
+//	@Router			/sharing/{fire_id}/file/{file_id} [get]
 func GetPublicFireFile(c *gin.Context) {
 
 	hit := models.GetHitBySharingKey(c.Param("key"))

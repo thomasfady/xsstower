@@ -5,14 +5,17 @@ import { useUserStore } from '@/stores/user'
 const store = useUserStore()
 
 async function handleLogin(){
-  store.login(email.value, password.value, loading.value)
+  store.login(email.value, password.value, loading.value, otp.value)
 }
 
 
 const email = ref("")
 const password = ref("")
+const otp = ref("")
+
 
 const loading = ref(false)
+
 </script>
 
 <template>
@@ -40,6 +43,9 @@ const loading = ref(false)
                   :maxlength="20"
                   @keydown.enter="handleLogin"
                   />
+              </n-form-item>
+              <n-form-item label="OTP" path="otp">
+                <n-input v-model:value="otp" placeholder="OTP if required" />
               </n-form-item>
               <n-form-item >
                 <n-button type="primary"

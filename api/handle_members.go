@@ -21,13 +21,13 @@ type HandlerMemberDeleteForm struct {
 	Id int `json:"user_id"  binding:"required"`
 }
 
-// @BasePath	/api/
-// @Summary	Update Handler Member Role
-// @Description	Update Handler Member Role
-// @Produce		json
-// @Router			/handler/{handler_id}/members [put]
-// @Tags Handlers
-// @Param			HandlerMemberEditForm body HandlerMemberEditForm	true "HandleOptions"
+//	@BasePath		/api/
+//	@Summary		Update Handler Member Role
+//	@Description	Update Handler Member Role
+//	@Produce		json
+//	@Router			/handler/{handler_id}/members [put]
+//	@Tags			Handlers
+//	@Param			HandlerMemberEditForm	body	HandlerMemberEditForm	true	"HandleOptions"
 func PutHandlerMembers(c *gin.Context) {
 	var form HandlerMemberEditForm
 	if err := c.Bind(&form); err != nil {
@@ -58,13 +58,13 @@ func PutHandlerMembers(c *gin.Context) {
 	}
 }
 
-// @BasePath	/api/
-// @Summary	Delete Handler Member
-// @Description	Delete Handler Member
-// @Produce		json
-// @Router			/handler/{handler_id}/members [delete]
-// @Tags Handlers
-// @Param			HandlerMemberDeleteForm body HandlerMemberDeleteForm	true "HandleOptions"
+//	@BasePath		/api/
+//	@Summary		Delete Handler Member
+//	@Description	Delete Handler Member
+//	@Produce		json
+//	@Router			/handler/{handler_id}/members [delete]
+//	@Tags			Handlers
+//	@Param			HandlerMemberDeleteForm	body	HandlerMemberDeleteForm	true	"HandleOptions"
 func DeleteHandlerMembers(c *gin.Context) {
 	var form HandlerMemberDeleteForm
 	if err := c.Bind(&form); err != nil {
@@ -94,13 +94,13 @@ func DeleteHandlerMembers(c *gin.Context) {
 	}
 }
 
-// @BasePath	/api/
-// @Summary	Create Handler Member
-// @Description	Create Handler Member
-// @Produce		json
-// @Router			/handler/{handler_id}/members [post]
-// @Tags Handlers
-// @Param			HandlerMemberCreateForm body HandlerMemberCreateForm	true "HandleOptions"
+//	@BasePath		/api/
+//	@Summary		Create Handler Member
+//	@Description	Create Handler Member
+//	@Produce		json
+//	@Router			/handler/{handler_id}/members [post]
+//	@Tags			Handlers
+//	@Param			HandlerMemberCreateForm	body	HandlerMemberCreateForm	true	"HandleOptions"
 func PostHandlerMembers(c *gin.Context) {
 	var form HandlerMemberCreateForm
 	if err := c.Bind(&form); err != nil {

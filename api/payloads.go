@@ -16,11 +16,11 @@ type Payload struct {
 	Value string
 }
 
-// @BasePath	/api/
-// @Summary	Payloads
-// @Description	Get formated payloads
-// @Produce		json
-// @Router			/payloads [get]
+//	@BasePath		/api/
+//	@Summary		Payloads
+//	@Description	Get formated payloads
+//	@Produce		json
+//	@Router			/payloads [get]
 func GetPayloads(c *gin.Context) {
 
 	user_id := c.GetInt("user_id")

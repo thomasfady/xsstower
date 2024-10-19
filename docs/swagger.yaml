@@ -83,11 +83,39 @@ definitions:
     properties:
       email:
         type: string
+      otp:
+        type: string
       password:
         type: string
     required:
     - email
     - password
+    type: object
+  api.SetPasswordForm:
+    properties:
+      confirm_password:
+        type: string
+      current_password:
+        type: string
+      new_password:
+        type: string
+    required:
+    - confirm_password
+    - current_password
+    - new_password
+    type: object
+  api.SetSecondFactorForm:
+    properties:
+      enable:
+        type: boolean
+      otp_code:
+        type: string
+      secret:
+        type: string
+    required:
+    - enable
+    - otp_code
+    - secret
     type: object
   models.PermisionType:
     enum:
@@ -99,6 +127,28 @@ definitions:
     - READ
     - WRITE
     - OWNER
+  types.NotifierInformation:
+    properties:
+      config:
+        items:
+          $ref: '#/definitions/types.NotifyConfig'
+        type: array
+      key:
+        type: string
+      name:
+        type: string
+    type: object
+  types.NotifyConfig:
+    properties:
+      key:
+        type: string
+      sensitive:
+        type: boolean
+      text:
+        type: string
+      value:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
@@ -361,6 +411,80 @@ paths:
       - application/json
       responses: {}
       summary: Payloads
+  /profile/2fa:
+    delete:
+      description: Delete 2FA
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete 2FA
+      tags:
+      - Profile
+    get:
+      description: Get 2FA information
+      produces:
+      - application/json
+      responses: {}
+      summary: Get 2FA information
+      tags:
+      - Profile
+    post:
+      description: Change Password
+      parameters:
+      - description: 2FA config
+        in: body
+        name: SetSecondFactorForm
+        required: true
+        schema:
+          $ref: '#/definitions/api.SetSecondFactorForm'
+      produces:
+      - application/json
+      responses: {}
+      summary: Set 2FA
+      tags:
+      - Profile
+  /profile/notifications:
+    get:
+      description: Get notification parameters
+      produces:
+      - application/json
+      responses: {}
+      summary: Get notification parameters
+      tags:
+      - Profile
+    post:
+      description: Set notification parameters
+      parameters:
+      - description: Params
+        in: body
+        name: Params
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/types.NotifierInformation'
+          type: array
+      produces:
+      - application/json
+      responses: {}
+      summary: Set notification parameters
+      tags:
+      - Profile
+  /profile/set_password:
+    post:
+      description: Change Password
+      parameters:
+      - description: Credentials
+        in: body
+        name: SetPasswordForm
+        required: true
+        schema:
+          $ref: '#/definitions/api.SetPasswordForm'
+      produces:
+      - application/json
+      responses: {}
+      summary: Change Password
+      tags:
+      - Profile
   /sharing/{fire_id}:
     get:
       description: Get XSS Fire information

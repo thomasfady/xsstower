@@ -1,7 +1,7 @@
 <script setup>
 import { RefreshOutline as Refresh, AddOutline as Add, AddCircleOutline as AddCircle } from "@vicons/ionicons5";
 
-import { NSwitch, useMessage } from 'naive-ui'
+import { NSwitch, useMessage, NTag } from 'naive-ui'
 import UsersActions from './users/UsersActions.vue'
 import CreateUser from './users/CreateUser.vue'
 import { ref,h } from 'vue'
@@ -23,6 +23,18 @@ const columns= [
     {
       title: "Email",
       key: "Email"
+    },
+    {
+      title: "OTP Enabled",
+      render(row) {
+        return h(
+          NTag,
+          {
+            "type": row.OTPEnabled ? "success" : "error",
+          },
+          row.OTPEnabled ? "Enabled" : "Disabled"
+        );
+      }
     },
     {
       title: "IsAdmin",

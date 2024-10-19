@@ -18,6 +18,8 @@ type User struct {
 	IsAdmin         bool              `gorm:"default:false"`
 	HandlersRbac    []HandlerRbac     `json:"-"`
 	NotifiersConfig map[string]string `gorm:"serializer:json" json:"-"`
+	OTPEnabled      bool              `gorm:"default:false"`
+	OTPSecret       string            `gorm:"size:16;not null;" json:"-"`
 }
 
 func (u *User) CheckPassword(pass string) bool {

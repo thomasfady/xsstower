@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 
+	"github.com/pquerna/otp/totp"
 	"github.com/thomasfady/xsstower/models"
 
 	"github.com/gin-contrib/sessions"
@@ -12,15 +13,23 @@ import (
 type LoginForm struct {
 	Email    string `json:"email"  binding:"required"`
 	Password string `json:"password" binding:"required"`
+	OTP      string `json:"otp" `
 }
 
-// @BasePath	/api/
-// @Summary	Login
+func SetSession(c *gin.Context, user models.User) {
+	session := sessions.Default(c)
+	session.Set("user_id", user.ID)
+	session.Set("is_admin", user.IsAdmin)
+	session.Save()
+}
+
+// @BasePath		/api/
+// @Summary		Login
 // @Description	Login
 // @Produce		json
 // @Router			/login [post]
-// @Param			LoginForm body LoginForm	true	"Credentials"
-// @Tags Authentication
+// @Param			LoginForm	body	LoginForm	true	"Credentials"
+// @Tags			Authentication
 func PostLogin(c *gin.Context) {
 	var form LoginForm
 	if err := c.ShouldBind(&form); err != nil {
@@ -31,12 +40,19 @@ func PostLogin(c *gin.Context) {
 		user := models.GetUserByEmail(form.Email)
 
 		if user.CheckPassword(form.Password) {
-			session := sessions.Default(c)
 
-			session.Set("user_id", user.ID)
-			session.Set("is_admin", user.IsAdmin)
-			session.Save()
-			c.JSON(http.StatusOK, user)
+			if user.OTPEnabled {
+				if totp.Validate(form.OTP, user.OTPSecret) {
+					SetSession(c, user)
+					c.JSON(http.StatusOK, user)
+				} else {
+					c.JSON(http.StatusUnauthorized, "Bad email or password")
+					return
+				}
+			} else {
+				SetSession(c, user)
+				c.JSON(http.StatusOK, user)
+			}
 			return
 
 		} else {

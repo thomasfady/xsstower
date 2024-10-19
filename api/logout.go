@@ -7,11 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @BasePath	/api/
-// @Summary	Logout
-// @Description	Logout Not working for now
-// @Produce		json
-// @Router			/logout [post]
+//	@BasePath		/api/
+//	@Summary		Logout
+//	@Description	Logout Not working for now
+//	@Produce		json
+//	@Router			/logout [post]
 func PostLogout(c *gin.Context) {
 	session := sessions.Default(c)
 	session.Clear()

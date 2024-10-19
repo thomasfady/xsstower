@@ -8,12 +8,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @BasePath	/api/
-// @Summary	Handlers
-// @Description	Get Handlers list
-// @Produce		json
-// @Router			/handlers [get]
-// @Tags Handlers
+//	@BasePath		/api/
+//	@Summary		Handlers
+//	@Description	Get Handlers list
+//	@Produce		json
+//	@Router			/handlers [get]
+//	@Tags			Handlers
 func GetHandlers(c *gin.Context) {
 
 	user_id := c.GetInt("user_id")
@@ -22,12 +22,12 @@ func GetHandlers(c *gin.Context) {
 	c.JSON(http.StatusOK, handlers)
 }
 
-// @BasePath	/api/
-// @Summary	Handlers
-// @Description	Get Handler information
-// @Produce		json
-// @Router			/handlers/{handler_id} [get]
-// @Tags Handlers
+//	@BasePath		/api/
+//	@Summary		Handlers
+//	@Description	Get Handler information
+//	@Produce		json
+//	@Router			/handlers/{handler_id} [get]
+//	@Tags			Handlers
 func GetHandler(c *gin.Context) {
 
 	user_id := c.GetInt("user_id")
@@ -53,13 +53,13 @@ type HandlerCreateForm struct {
 	Path       string `json:"path"  binding:"required"`
 }
 
-// @BasePath	/api/
-// @Summary	Handlers
-// @Description	Update Handler information
-// @Produce		json
-// @Router			/handlers/{handler_id} [put]
-// @Param			HandlerUpdateForm body HandlerUpdateForm	true "HandleOptions"
-// @Tags Handlers
+//	@BasePath		/api/
+//	@Summary		Handlers
+//	@Description	Update Handler information
+//	@Produce		json
+//	@Router			/handlers/{handler_id} [put]
+//	@Param			HandlerUpdateForm	body	HandlerUpdateForm	true	"HandleOptions"
+//	@Tags			Handlers
 func PutHandler(c *gin.Context) {
 	var form HandlerUpdateForm
 	if err := c.Bind(&form); err != nil {
@@ -83,12 +83,12 @@ func PutHandler(c *gin.Context) {
 
 }
 
-// @BasePath	/api/
-// @Summary	Handlers
-// @Description	Delete Handler
-// @Produce		json
-// @Router			/handlers/{handler_id} [delete]
-// @Tags Handlers
+//	@BasePath		/api/
+//	@Summary		Handlers
+//	@Description	Delete Handler
+//	@Produce		json
+//	@Router			/handlers/{handler_id} [delete]
+//	@Tags			Handlers
 func DeleteHandler(c *gin.Context) {
 	user_id := c.GetInt("user_id")
 
@@ -102,13 +102,13 @@ func DeleteHandler(c *gin.Context) {
 
 }
 
-// @BasePath	/api/
-// @Summary	Create Handler
-// @Description	Update Handler information
-// @Produce		json
-// @Router			/handlers [post]
-// @Param			HandlerCreateForm body HandlerCreateForm	true "HandleOptions"
-// @Tags Handlers
+//	@BasePath		/api/
+//	@Summary		Create Handler
+//	@Description	Update Handler information
+//	@Produce		json
+//	@Router			/handlers [post]
+//	@Param			HandlerCreateForm	body	HandlerCreateForm	true	"HandleOptions"
+//	@Tags			Handlers
 func PostHandler(c *gin.Context) {
 	var form HandlerCreateForm
 	if err := c.Bind(&form); err != nil {

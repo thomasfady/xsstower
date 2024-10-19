@@ -9,25 +9,25 @@ import (
 	"github.com/spf13/viper"
 )
 
-// @BasePath	/api/
-// @Summary	Config
-// @Description	Get Config
-// @Produce		json
-// @Router			/admin/config [get]
-// @Tags Administration
+//	@BasePath		/api/
+//	@Summary		Config
+//	@Description	Get Config
+//	@Produce		json
+//	@Router			/admin/config [get]
+//	@Tags			Administration
 func GetConfig(c *gin.Context) {
 
 	c.JSON(http.StatusOK, viper.AllSettings())
 }
 
-// @BasePath	/api/
-// @Summary	Config
-// @Description	Update config Config
-// @Produce		json
-// @Router			/admin/config [put]
-// @Param			ConfigValues body map[string]string true "ConfigValues"
-// @Success      200  {object}  map[string]interface{}
-// @Tags Administration
+//	@BasePath		/api/
+//	@Summary		Config
+//	@Description	Update config Config
+//	@Produce		json
+//	@Router			/admin/config [put]
+//	@Param			ConfigValues	body		map[string]string	true	"ConfigValues"
+//	@Success		200				{object}	map[string]interface{}
+//	@Tags			Administration
 func PutConfig(c *gin.Context) {
 	var obj map[string]interface{}
 	body, err := ioutil.ReadAll(c.Request.Body)

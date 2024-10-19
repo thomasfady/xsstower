@@ -393,6 +393,114 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/profile/2fa": {
+            "get": {
+                "description": "Get 2FA information",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get 2FA information",
+                "responses": {}
+            },
+            "post": {
+                "description": "Change Password",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Set 2FA",
+                "parameters": [
+                    {
+                        "description": "2FA config",
+                        "name": "SetSecondFactorForm",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.SetSecondFactorForm"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "description": "Delete 2FA",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Delete 2FA",
+                "responses": {}
+            }
+        },
+        "/profile/notifications": {
+            "get": {
+                "description": "Get notification parameters",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Get notification parameters",
+                "responses": {}
+            },
+            "post": {
+                "description": "Set notification parameters",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Set notification parameters",
+                "parameters": [
+                    {
+                        "description": "Params",
+                        "name": "Params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/types.NotifierInformation"
+                            }
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/profile/set_password": {
+            "post": {
+                "description": "Change Password",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Change Password",
+                "parameters": [
+                    {
+                        "description": "Credentials",
+                        "name": "SetPasswordForm",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.SetPasswordForm"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/sharing/{fire_id}": {
             "get": {
                 "description": "Get XSS Fire information",
@@ -551,7 +659,48 @@ const docTemplate = `{
                 "email": {
                     "type": "string"
                 },
+                "otp": {
+                    "type": "string"
+                },
                 "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.SetPasswordForm": {
+            "type": "object",
+            "required": [
+                "confirm_password",
+                "current_password",
+                "new_password"
+            ],
+            "properties": {
+                "confirm_password": {
+                    "type": "string"
+                },
+                "current_password": {
+                    "type": "string"
+                },
+                "new_password": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.SetSecondFactorForm": {
+            "type": "object",
+            "required": [
+                "enable",
+                "otp_code",
+                "secret"
+            ],
+            "properties": {
+                "enable": {
+                    "type": "boolean"
+                },
+                "otp_code": {
+                    "type": "string"
+                },
+                "secret": {
                     "type": "string"
                 }
             }
@@ -568,6 +717,40 @@ const docTemplate = `{
                 "WRITE",
                 "OWNER"
             ]
+        },
+        "types.NotifierInformation": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/types.NotifyConfig"
+                    }
+                },
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "types.NotifyConfig": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "sensitive": {
+                    "type": "boolean"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
         }
     }
 }`

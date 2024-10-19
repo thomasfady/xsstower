@@ -19,12 +19,12 @@ type APIFires struct {
 	CorrelationKey string
 }
 
-// @BasePath	/api/
-// @Summary	Fires
-// @Description	Get XSS Fires
-// @Produce		json
-// @Tags XSSFire
-// @Router			/fires [get]
+//	@BasePath		/api/
+//	@Summary		Fires
+//	@Description	Get XSS Fires
+//	@Produce		json
+//	@Tags			XSSFire
+//	@Router			/fires [get]
 func GetFires(c *gin.Context) {
 
 	user_id := c.GetInt("user_id")
@@ -55,12 +55,12 @@ func GetFires(c *gin.Context) {
 	})
 }
 
-// @BasePath	/api/
-// @Summary	Fire
-// @Description	Get XSS Fire information
-// @Produce		json
-// @Tags XSSFire
-// @Router			/fire/{fire_id} [get]
+//	@BasePath		/api/
+//	@Summary		Fire
+//	@Description	Get XSS Fire information
+//	@Produce		json
+//	@Tags			XSSFire
+//	@Router			/fire/{fire_id} [get]
 func GetFire(c *gin.Context) {
 
 	user_id := c.GetInt("user_id")
@@ -74,11 +74,11 @@ func GetFire(c *gin.Context) {
 
 }
 
-// @BasePath	/api/
-// @Summary	Fire
-// @Tags XSSFire
-// @Description	Get XSS Fire File
-// @Router			/fire/{fire_id}/file/{file_id} [get]
+//	@BasePath		/api/
+//	@Summary		Fire
+//	@Tags			XSSFire
+//	@Description	Get XSS Fire File
+//	@Router			/fire/{fire_id}/file/{file_id} [get]
 func GetFireFile(c *gin.Context) {
 
 	user_id := c.GetInt("user_id")
@@ -103,12 +103,12 @@ func GetFireFile(c *gin.Context) {
 	}
 }
 
-// @BasePath	/api/
-// @Summary	Fires
-// @Description	Delete Fire
-// @Produce		json
-// @Tags XSSFire
-// @Router			/fire/{fire_id} [delete]
+//	@BasePath		/api/
+//	@Summary		Fires
+//	@Description	Delete Fire
+//	@Produce		json
+//	@Tags			XSSFire
+//	@Router			/fire/{fire_id} [delete]
 func DeleteFire(c *gin.Context) {
 	user_id := c.GetInt("user_id")
 
@@ -123,12 +123,12 @@ func DeleteFire(c *gin.Context) {
 
 }
 
-// @BasePath	/api/
-// @Summary	Fires sharing
-// @Description	Enable fire sharing
-// @Produce		json
-// @Tags XSSFire
-// @Router			/fire/{fire_id}/share [post]
+//	@BasePath		/api/
+//	@Summary		Fires sharing
+//	@Description	Enable fire sharing
+//	@Produce		json
+//	@Tags			XSSFire
+//	@Router			/fire/{fire_id}/share [post]
 func PostFireShare(c *gin.Context) {
 
 	user_id := c.GetInt("user_id")
@@ -142,11 +142,11 @@ func PostFireShare(c *gin.Context) {
 	}
 }
 
-// @BasePath	/api/
-// @Summary	Fires sharing
-// @Description	Disable fire sharing
-// @Tags XSSFire
-// @Router			/fire/{fire_id}/share [delete]
+//	@BasePath		/api/
+//	@Summary		Fires sharing
+//	@Description	Disable fire sharing
+//	@Tags			XSSFire
+//	@Router			/fire/{fire_id}/share [delete]
 func DeleteFireShare(c *gin.Context) {
 
 	user_id := c.GetInt("user_id")
